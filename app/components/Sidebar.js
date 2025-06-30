@@ -4,6 +4,7 @@ import Link from "next/link";
 import SidebarNoteList from "./SidebarNoteList";
 import EditButton from "./EditButton";
 import NoteListSkeleton from "./NoteListSkeleton";
+import SidebarSearchField from "./SidebarSearchField";
 import Image from "next/image";
 
 // // 移除数据请求部分，为 SidebarNoteList 添加 Suspense 以及 fallback UI NoteListSkeleton
@@ -25,6 +26,7 @@ export default async function Sidebar() {
           </section>
         </Link>
         <section className="sidebar-menu" role="menubar">
+          <SidebarSearchField />
           <EditButton noteId={null}>New</EditButton>
         </section>
         <nav>

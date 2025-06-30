@@ -4,7 +4,6 @@ import { getNote } from "../../../../lib/redis";
 export default async function EditPage(props) {
   const { params } = props;
   const noteId = params.id;
-  console.log("params.id =", params.id); // ✅ 正常输出
   const note = await getNote(noteId);
 
   // 让效果更明显
