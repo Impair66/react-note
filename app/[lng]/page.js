@@ -1,10 +1,9 @@
-import { useTranslation } from "../i18n/index.js";
-
-export default async function Page({ params: { lng } }) {
-  const { t } = await useTranslation(lng);
+export default async function Page() {
   return (
     <div className="note--empty-state">
-      <span className="note-text--empty-state">{t("initText")}</span>
+      <span className="note-text--empty-state">
+        Click a note on the left to view something!
+      </span>
     </div>
   );
 }

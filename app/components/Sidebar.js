@@ -6,6 +6,7 @@ import EditButton from "./EditButton";
 import NoteListSkeleton from "./NoteListSkeleton";
 import SidebarSearchField from "./SidebarSearchField";
 import Image from "next/image";
+import logoSvg from "../../public/logo.svg";
 
 // // 移除数据请求部分，为 SidebarNoteList 添加 Suspense 以及 fallback UI NoteListSkeleton
 export default async function Sidebar() {
@@ -16,7 +17,7 @@ export default async function Sidebar() {
           <section className="sidebar-header">
             <Image
               className="logo"
-              src="/logo.svg"
+              src={logoSvg}
               width={22}
               height={20}
               alt=""

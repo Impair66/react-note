@@ -1,34 +1,12 @@
 // middleware.js
-import { match } from "@formatjs/intl-localematcher";
-import Negotiator from "negotiator";
-import { locales, defaultLocale } from "./config";
-
-function getLocale(request) {
-  const headers = {
-    "accept-language": request.headers.get("accept-language") || "",
-  };
-  // 这里不能直接传入 request，有更简单的写法欢迎评论留言
-  const languages = new Negotiator({ headers }).languages();
-
-  return match(languages, locales, defaultLocale);
-}
-
+// i18n middleware removed. Previously this file performed automatic locale
+// prefixing. Project was refactored to remove i18n — keep a no-op middleware
+// placeholder to avoid runtime errors if Next expects the file to exist.
 export function middleware(request) {
-  const { pathname } = request.nextUrl;
-  // 判断请求路径中是否已存在语言，已存在语言则跳过
-  const pathnameHasLocale = locales.some(
-    (locale) => pathname.startsWith(`/${locale}/`) || pathname === `/${locale}`
-  );
-
-  if (pathnameHasLocale) return;
-
-  // 获取匹配的 locale
-  const locale = getLocale(request);
-  request.nextUrl.pathname = `/${locale}${pathname}`;
-  // 重定向，如 /products 重定向到 /en-US/products
-  return Response.redirect(request.nextUrl);
+  // no-op
+  return;
 }
 
 export const config = {
-  matcher: ["/((?!api|_next/static|_next/image|favicon.ico).*)"],
+  matcher: [],
 };

@@ -10,8 +10,9 @@
   },
   "dependencies": {
     "@formatjs/intl-localematcher": "^0.6.1",
+    "@supabase/auth-helpers-nextjs": "^0.14.0",
+    "@supabase/supabase-js": "^2.87.1",
     "dayjs": "^1.11.13",
-    "i18next": "^25.2.1",
     "i18next-resources-to-backend": "^1.2.1",
     "ioredis": "^5.6.1",
     "marked": "^15.0.12",

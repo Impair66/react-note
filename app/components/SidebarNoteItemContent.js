@@ -3,6 +3,8 @@
 import { useState, useRef, useEffect, useTransition } from "react";
 import { useRouter, usePathname } from "next/navigation";
 import Image from "next/image";
+import nextSvg from "../../public/next.svg";
+import fileSvg from "../../public/file.svg";
 
 export default function SidebarNoteContent({
   id,
@@ -12,7 +14,10 @@ export default function SidebarNoteContent({
 }) {
   const router = useRouter();
   const pathname = usePathname();
-  const selectedId = pathname?.split("/")[1] || null;
+  const pathParts = pathname?.split("/").filter(Boolean) || [];
+  // selectedId should be the last segment of the path (e.g. /note/123)
+  const selectedId =
+    pathParts.length > 0 ? pathParts[pathParts.length - 1] : null;
 
   const [isPending] = useTransition();
   const [isExpanded, setIsExpanded] = useState(false);
@@ -71,9 +76,9 @@ export default function SidebarNoteContent({
         }}
       >
         {isExpanded ? (
-          <Image src="/file.svg" width={10} height={10} alt="Collapse" />
+          <Image src={fileSvg} width={10} height={10} alt="Collapse" />
         ) : (
-          <Image src="/next.svg" width={10} height={10} alt="Expand" />
+          <Image src={nextSvg} width={10} height={10} alt="Expand" />
         )}
       </button>
       {isExpanded && expandedChildren}
