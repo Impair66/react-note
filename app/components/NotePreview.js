@@ -1,3 +1,4 @@
+import { memo } from "react";
 import { marked } from "marked";
 import sanitizeHtml from "sanitize-html";
 
@@ -15,7 +16,7 @@ const allowedAttributes = Object.assign(
   }
 );
 
-export default function NotePreview({ children }) {
+function NotePreview({ children }) {
   return (
     <div className="note-preview">
       <div
@@ -30,3 +31,5 @@ export default function NotePreview({ children }) {
     </div>
   );
 }
+
+export default memo(NotePreview);

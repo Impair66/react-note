@@ -2,10 +2,10 @@
 
 import { useEffect, useState } from "react";
 import { useFormState } from "react-dom";
-import NotePreview from "../components/NotePreview";
-import DeleteButton from "../components/DeleteButton";
-import SaveButton from "../components/SaveButton";
-import { deleteNote, saveNote } from "../action";
+import NotePreview from "@/components/NotePreview";
+import DeleteButton from "@/components/DeleteButton";
+import SaveButton from "@/components/SaveButton";
+import { deleteNote, saveNote } from "@/app/action";
 
 const initialState = {
   message: null,
@@ -22,8 +22,7 @@ export default function NoteEditor({ noteId, initialTitle, initialBody }) {
 
   useEffect(() => {
     if (saveState.errors) {
-      // 处理错误
-      console.log(saveState.errors);
+      console.error("表单校验错误:", saveState.errors);
     }
   }, [saveState]);
 

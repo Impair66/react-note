@@ -1,5 +1,5 @@
 import dayjs from "dayjs";
-import SidebarNoteItemContent from "./SidebarNoteItemContent";
+import SidebarNoteItemContent from "@/components/SidebarNoteItemContent";
 
 export default function SidebarNoteItem({ noteId, note }) {
   const { title, content = "", updateTime } = note;
@@ -15,7 +15,7 @@ export default function SidebarNoteItem({ noteId, note }) {
     >
       <header className="sidebar-note-header">
         <strong>{title}</strong>
-        <small>{dayjs(updateTime).format("YYYY-MM-DD hh:mm:ss")}</small>
+        <small>{dayjs(updateTime).format("YYYY-MM-DD HH:mm:ss")}</small>
       </header>
     </SidebarNoteItemContent>
   );

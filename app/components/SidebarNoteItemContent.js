@@ -3,8 +3,8 @@
 import { useState, useRef, useEffect, useTransition } from "react";
 import { useRouter, usePathname } from "next/navigation";
 import Image from "next/image";
-import nextSvg from "../../public/next.svg";
-import fileSvg from "../../public/file.svg";
+import nextSvg from "@/public/next.svg";
+import fileSvg from "@/public/file.svg";
 
 export default function SidebarNoteContent({
   id,
@@ -15,7 +15,6 @@ export default function SidebarNoteContent({
   const router = useRouter();
   const pathname = usePathname();
   const pathParts = pathname?.split("/").filter(Boolean) || [];
-  // selectedId should be the last segment of the path (e.g. /note/123)
   const selectedId =
     pathParts.length > 0 ? pathParts[pathParts.length - 1] : null;
 
@@ -23,31 +22,36 @@ export default function SidebarNoteContent({
   const [isExpanded, setIsExpanded] = useState(false);
   const isActive = id === selectedId;
 
-  // Animate after title is edited.
   const itemRef = useRef(null);
   const prevTitleRef = useRef(title);
+  const sidebarToggleRef = useRef(null);
 
   useEffect(() => {
     if (title !== prevTitleRef.current) {
       prevTitleRef.current = title;
-      itemRef.current.classList.add("flash");
+      itemRef.current?.classList.add("flash");
     }
   }, [title]);
+
+  const buttonClass = [
+    "sidebar-note-open",
+    isPending ? "pending" : "",
+    isActive ? "active" : "",
+  ]
+    .filter(Boolean)
+    .join(" ");
 
   return (
     <div
       ref={itemRef}
       onAnimationEnd={() => {
-        itemRef.current.classList.remove("flash");
+        itemRef.current?.classList.remove("flash");
       }}
-      className={[
-        "sidebar-note-list-item",
-        isExpanded ? "note-expanded" : "",
-      ].join(" ")}
+      className={["sidebar-note-list-item", isExpanded ? "note-expanded" : ""].join(" ")}
     >
       {children}
       <button
-        className="sidebar-note-open"
+        className={buttonClass}
         style={{
           backgroundColor: isPending
             ? "var(--gray-80)"
@@ -75,11 +79,12 @@ export default function SidebarNoteContent({
           setIsExpanded(!isExpanded);
         }}
       >
-        {isExpanded ? (
-          <Image src={fileSvg} width={10} height={10} alt="Collapse" />
-        ) : (
-          <Image src={nextSvg} width={10} height={10} alt="Expand" />
-        )}
+        <Image
+          src={isExpanded ? fileSvg : nextSvg}
+          width={10}
+          height={10}
+          alt={isExpanded ? "Collapse" : "Expand"}
+        />
       </button>
       {isExpanded && expandedChildren}
     </div>

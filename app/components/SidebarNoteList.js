@@ -1,13 +1,11 @@
-import SidebarNoteListFilter from "./SidebarNoteListFilter";
-import { getAllNotes } from "../../lib/redis";
-import { sleep } from "../../lib/utils";
+import SidebarNoteListFilter from "@/components/SidebarNoteListFilter";
+import { getAllNotes } from "@/lib/redis";
 
 export default async function NoteList() {
-  await sleep(3000);
   const notes = await getAllNotes();
 
-  if (Object.entries(notes).length == 0) {
-    return <div className="notes-empty">{"No notes created yet!"}</div>;
+  if (Object.keys(notes).length === 0) {
+    return <div className="notes-empty">{"暂无笔记!"}</div>;
   }
 
   return <SidebarNoteListFilter notes={notes} />;
