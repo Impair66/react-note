@@ -1,7 +1,6 @@
 "use client";
 
-import { useEffect, useState } from "react";
-import { useFormState } from "react-dom";
+import { useEffect, useState, useActionState } from "react";
 import NotePreview from "@/components/NotePreview";
 import DeleteButton from "@/components/DeleteButton";
 import SaveButton from "@/components/SaveButton";
@@ -12,8 +11,8 @@ const initialState = {
 };
 
 export default function NoteEditor({ noteId, initialTitle, initialBody }) {
-  const [saveState, saveFormAction] = useFormState(saveNote, initialState);
-  const [delState, delFormAction] = useFormState(deleteNote, initialState);
+  const [saveState, saveFormAction] = useActionState(saveNote, initialState);
+  const [delState, delFormAction] = useActionState(deleteNote, initialState);
 
   const [title, setTitle] = useState(initialTitle);
   const [body, setBody] = useState(initialBody);

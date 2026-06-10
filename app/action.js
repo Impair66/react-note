@@ -23,14 +23,16 @@ export async function saveNote(prevState, formData) {
     return { errors: validated.error.issues };
   }
 
+  let targetId;
   if (noteId) {
     await updateNote(noteId, JSON.stringify(data));
+    targetId = noteId;
   } else {
-    await addNote(JSON.stringify(data));
+    targetId = await addNote(JSON.stringify(data));
   }
 
   revalidatePath("/", "layout");
-  return { message: "保存成功!" };
+  redirect(`/note/${targetId}`);
 }
 
 export async function deleteNote(prevState, formData) {
